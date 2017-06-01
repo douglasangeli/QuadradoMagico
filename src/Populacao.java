@@ -30,39 +30,57 @@ public class Populacao {
 
         //filho 1, primeira metade do pai
         //filho 2, primeira metade da mae
-        for (int i = 0; i < this.dimensao / 2; i++) {
-            for (int j = 0; j < this.dimensao; j++) {
+        for (int i = 0; i < dimensao / 2; i++) {
+            for (int j = 0; j < dimensao; j++) {
                 filho1[i][j] = genesPai[i][j];
                 filho2[i][j] = genesMae[i][j];
             }
         }
 
-        for (int i = this.dimensao / 2; i < this.dimensao; i++) {
-            for (int j = 0; j < this.dimensao; j++) {
-                filho1[i][j] = genesPai[i][j];
-                filho2[i][j] = genesMae[i][j];
+        //percorrer a segunda metade do filho1 vendo os elementos da mae que ele nao tem
+        for (int i = dimensao / 2; i < dimensao; i++) {
+            for (int j = 0; j < dimensao; j++) {
+
+                //percorrer a mae
+                for (int pi = 0; pi < dimensao; pi++) {
+                    for (int pj = 0; pj < dimensao; pj++) {
+
+                        if (filho1[i][j] == 0 && !arrayPossuiElemento(filho1, genesMae[pi][pj])) {
+                            filho1[i][j] = genesMae[pi][pj];
+                        }
+
+                        if (filho2[i][j] == 0 && !arrayPossuiElemento(filho2, genesPai[pi][pj])) {
+                            filho2[i][j] = genesPai[pi][pj];
+                        }
+
+                        if (filho1[i][j] > 0 && filho2[i][j] > 0) {
+                            break;
+                        }
+                    }
+                    if (filho1[i][j] > 0 && filho2[i][j] > 0) {
+                        break;
+                    }
+                }
             }
         }
-
-
 
         // Faz mutacao trocando dois pontos randomicos
-//        Random rand = new Random();
-//        int pontoMutacao1 = rand.nextInt(genesPai.length());
-//        int pontoMutacao2 = rand.nextInt(genesPai.length());
-//
-//        StringBuilder f1 = new StringBuilder(filho1);
-//        f1.setCharAt(pontoMutacao1, filho1.charAt(pontoMutacao2));
-//        f1.setCharAt(pontoMutacao2, filho1.charAt(pontoMutacao1));
-//        filho1 = f1.toString();
-//
-//        StringBuilder f2 = new StringBuilder(filho2);
-//        f2.setCharAt(pontoMutacao1, filho2.charAt(pontoMutacao2));
-//        f2.setCharAt(pontoMutacao2, filho2.charAt(pontoMutacao1));
-//        filho2 = f2.toString();
-//        //
-//        retorno.add(new Cromossomo(filho1));
-//        retorno.add(new Cromossomo(filho2));
+        Random rand = new Random();
+        int h1 = rand.nextInt(dimensao);
+        int v1 = rand.nextInt(dimensao);
+        int h2 = rand.nextInt(dimensao);
+        int v2 = rand.nextInt(dimensao);
+
+        int aux = filho1[h1][v1];
+        filho1[h1][v1] = filho1[h2][v2];
+        filho1[h2][v2] = aux;
+
+        aux = filho2[h1][v1];
+        filho2[h1][v1] = filho2[h2][v2];
+        filho2[h2][v2] = aux;
+        //
+        retorno.add(new Cromossomo(filho1));
+        retorno.add(new Cromossomo(filho2));
         return retorno;
     }
 
@@ -91,6 +109,17 @@ public class Populacao {
 
         // Define a populacao com a nova geracao
         this.cromossomos = geracao;
+    }
+
+    public boolean arrayPossuiElemento(int[][] array, int elemento) {
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array.length; j++) {
+                if (array[i][j] == elemento) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
 

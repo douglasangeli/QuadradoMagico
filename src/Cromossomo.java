@@ -25,10 +25,11 @@ public class Cromossomo implements Comparable<Cromossomo> {
 //                {15, 4, 14, 1},
 //                {10, 13, 3, 8}};
 
-        //int maior = dimensao * dimensao;
-        //this.numeroMagico = (maior * (maior + 1) / 2) / dimensao;
-
         this.numeroMagico = ((int) Math.pow(dimensao, 3) + dimensao) / 2;
+    }
+
+    public Cromossomo(int[][] filho) {
+        //todo: fazer esse construtor funcionar
     }
 
     @Override
