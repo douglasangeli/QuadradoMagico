@@ -65,19 +65,22 @@ public class Populacao {
         }
 
         // Faz mutacao trocando dois pontos randomicos
-        Random rand = new Random();
-        int h1 = rand.nextInt(dimensao);
-        int v1 = rand.nextInt(dimensao);
-        int h2 = rand.nextInt(dimensao);
-        int v2 = rand.nextInt(dimensao);
+        for (int i = 0; i < dimensao; i++) {
+            Random rand = new Random();
+            int h1 = rand.nextInt(dimensao);
+            int v1 = rand.nextInt(dimensao);
+            int h2 = rand.nextInt(dimensao);
+            int v2 = rand.nextInt(dimensao);
 
-        int aux = filho1[h1][v1];
-        filho1[h1][v1] = filho1[h2][v2];
-        filho1[h2][v2] = aux;
+            int aux = filho1[h1][v1];
+            filho1[h1][v1] = filho1[h2][v2];
+            filho1[h2][v2] = aux;
 
-        aux = filho2[h1][v1];
-        filho2[h1][v1] = filho2[h2][v2];
-        filho2[h2][v2] = aux;
+            aux = filho2[h1][v1];
+            filho2[h1][v1] = filho2[h2][v2];
+            filho2[h2][v2] = aux;
+        }
+
         //
         retorno.add(new Cromossomo(filho1));
         retorno.add(new Cromossomo(filho2));

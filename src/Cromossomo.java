@@ -1,4 +1,6 @@
-import java.util.StringJoiner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Cromossomo implements Comparable<Cromossomo> {
 
@@ -8,29 +10,39 @@ public class Cromossomo implements Comparable<Cromossomo> {
 
     public Cromossomo(int dimensao) {
         this.dimensao = dimensao;
-        this.genes = new int[dimensao][dimensao];
+        this.genes = getQuadradoAleatorio(dimensao);
+
+        calcularNumeroMagico();
+    }
+
+    private int[][] getQuadradoAleatorio(int dimensao) {
+        int[][] genes = new int[dimensao][dimensao];
+        List<Integer> list = new ArrayList<Integer>();
+        for (int i = 1; i <= (dimensao * dimensao); i++) {
+            list.add(i);
+        }
+        Collections.shuffle(list);
 
         int count = 0;
 
         for (int i = 0; i < dimensao; i++) {
             for (int j = 0; j < dimensao; j++) {
-                this.genes[i][j] = ++count;
+                genes[i][j] = list.get(count++);
             }
         }
+        return genes;
+    }
 
-        //perfeito
-//        genes = new int[][]{
-//                {7, 12, 6, 9},
-//                {2, 5, 11, 16},
-//                {15, 4, 14, 1},
-//                {10, 13, 3, 8}};
-
+    private void calcularNumeroMagico() {
         this.numeroMagico = ((int) Math.pow(dimensao, 3) + dimensao) / 2;
     }
 
-    public Cromossomo(int[][] filho) {
-        //todo: fazer esse construtor funcionar
+    public Cromossomo(int[][] genes) {
+        this.genes = genes;
+        this.dimensao = genes.length;
+        calcularNumeroMagico();
     }
+
 
     @Override
     public String toString() {
