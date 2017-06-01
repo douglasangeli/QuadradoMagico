@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Populacao {
 
-    private int tamanho = 5;
+    private int tamanho = 7;
     private int dimensao;
     private ArrayList<Cromossomo> cromossomos;
 
@@ -65,7 +65,7 @@ public class Populacao {
         }
 
         // Faz mutacao trocando dois pontos randomicos
-        for (int i = 0; i < dimensao; i++) {
+        for (int i = 0; i < dimensao / 4; i++) {
             Random rand = new Random();
             int h1 = rand.nextInt(dimensao);
             int v1 = rand.nextInt(dimensao);

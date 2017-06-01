@@ -39,7 +39,8 @@ public class Main {
 
             if (geracoesSemMelhora > LIMITE_POPULACOES_SEM_MELHORA) {
                 System.out.println();
-                System.out.println(LIMITE_POPULACOES_SEM_MELHORA + " Populacoes sem melhora. Cromossomo mais APTO:\n" + melhorCromossomo.toString());
+                System.out.println(LIMITE_POPULACOES_SEM_MELHORA + " Populacoes sem melhora. Cromossomo mais APTO:\n" +
+                        melhorCromossomo.toString());
                 break;
             } else if (aptidao == 0) {
                 System.out.println();
