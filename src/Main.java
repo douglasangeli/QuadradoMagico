@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static final int LIMITE_POPULACIONAL = 5000000;
+    public static final int LIMITE_POPULACIONAL = 50000000;
     public static final int LIMITE_POPULACOES_SEM_MELHORA = 100000;
 
     public static void main(String[] args) {

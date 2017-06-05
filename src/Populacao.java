@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Populacao {
 
-    private int tamanho = 7;
+    private int tamanho = 5;
     private int dimensao;
     private ArrayList<Cromossomo> cromossomos;
 
@@ -65,7 +65,7 @@ public class Populacao {
         }
 
         // Faz mutacao trocando dois pontos randomicos
-        for (int i = 0; i < dimensao / 4; i++) {
+        for (int i = 0; i < dimensao / 3; i++) {
             Random rand = new Random();
             int h1 = rand.nextInt(dimensao);
             int v1 = rand.nextInt(dimensao);
@@ -97,15 +97,16 @@ public class Populacao {
         geracao.add(this.cromossomos.get(0));
 
         // Pega os dois melhores e faz crossover
-        geracao.addAll(this.crossover(this.cromossomos.get(0), this.cromossomos.get(1)));
+        ArrayList<Cromossomo> resultadoCrossover = this.crossover(this.cromossomos.get(0), this.cromossomos.get(1));
+        geracao.addAll(resultadoCrossover);
 
 
         // Pega outros dois aleatoriamente e faz o crossover para completar
         Random rand = new Random();
-        int pai = rand.nextInt(tamanho - 1) + 1;
-        int mae = rand.nextInt(tamanho - 1) + 1;
+        int pai = rand.nextInt(tamanho - 1);
+        int mae = rand.nextInt(tamanho - 1);
         while (mae == pai) {
-            mae = rand.nextInt(tamanho - 1) + 1;
+            mae = rand.nextInt(tamanho - 1);
         }
 
         geracao.addAll(this.crossover(this.cromossomos.get(pai), this.cromossomos.get(mae)));
